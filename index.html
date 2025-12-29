@@ -49,26 +49,13 @@ body {
     border-radius: 50%;
 }
 
-.heart::before {
-    top: -9px;
-    left: 0;
-}
-
-.heart::after {
-    left: -9px;
-    top: 0;
-}
+.heart::before { top: -9px; left: 0; }
+.heart::after { left: -9px; top: 0; }
 
 @keyframes floatUp {
-    from {
-        transform: translateY(110vh) rotate(45deg) scale(0.8);
-        opacity: 0;
-    }
-    20% { opacity: 0.6; }
-    to {
-        transform: translateY(-10vh) rotate(45deg) scale(1.1);
-        opacity: 0;
-    }
+    from { transform: translateY(110vh) rotate(45deg) scale(0.8); opacity:0; }
+    20% { opacity:0.6; }
+    to { transform: translateY(-10vh) rotate(45deg) scale(1.1); opacity:0; }
 }
 
 /* 💌 MAIN CARD */
@@ -85,14 +72,8 @@ body {
 }
 
 @keyframes cardIn {
-    from {
-        opacity: 0;
-        transform: scale(0.8) translateY(30px);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1) translateY(0);
-    }
+    from { opacity:0; transform: scale(0.8) translateY(30px); }
+    to { opacity:1; transform: scale(1) translateY(0); }
 }
 
 h1 {
@@ -129,22 +110,14 @@ button {
     color: black;
     box-shadow: 0 0 15px rgba(255, 143, 177, 0.6);
 }
-
-.love:hover {
-    transform: scale(1.15);
-    box-shadow: 0 0 30px rgba(255, 143, 177, 0.9);
-}
+.love:hover { transform: scale(1.15); box-shadow: 0 0 30px rgba(255, 143, 177, 0.9); }
 
 .ew {
     background: white;
     color: black;
     opacity: 0.85;
 }
-
-.ew:hover {
-    transform: scale(1.05);
-    opacity: 1;
-}
+.ew:hover { transform: scale(1.05); opacity:1; }
 
 /* 💬 MESSAGE */
 #message {
@@ -154,11 +127,7 @@ button {
     min-height: 40px;
     animation: fadeIn 0.8s ease;
 }
-
-@keyframes fadeIn {
-    from { opacity: 0; }
-    to { opacity: 1; }
-}
+@keyframes fadeIn { from {opacity:0;} to{opacity:1;} }
 
 /* 🖊️ WATERMARK */
 .watermark {
@@ -177,7 +146,7 @@ button {
 </head>
 <body>
 
-<!-- HEART GENERATOR -->
+<!-- HEARTS -->
 <script>
 for (let i = 0; i < 45; i++) {
     const heart = document.createElement("div");
@@ -191,39 +160,38 @@ for (let i = 0; i < 45; i++) {
 
 <div class="card">
     <h1>I Love You ❤️</h1>
-
     <div class="buttons">
         <button class="love" onclick="loveChoice()">I love you</button>
         <button class="ew" onclick="ewChoice()">Ew I don’t love you</button>
     </div>
-
     <div id="message"></div>
 </div>
 
-<!-- WATERMARK -->
 <div class="watermark">@editsbynyko</div>
 
 <!-- AUDIO -->
-<audio id="audio"></audio>
+<audio id="audio" preload="auto" style="display:none"></audio>
 
 <script>
 const audio = document.getElementById("audio");
 
 function loveChoice() {
     showMessage("You bring out the extraordinary 💕");
-    playSong("1.mp3");
+    playSong("1.mp3"); // MUST be at project root
 }
 
 function ewChoice() {
     showMessage("Idc you’re stuck with me 😈💗");
-    playSong("2.mp3");
+    playSong("2.mp3"); // MUST be at project root
 }
 
 function playSong(src) {
     audio.pause();
     audio.src = src;
     audio.currentTime = 0;
-    audio.play();
+    audio.play().catch(err => {
+        console.log("Audio play prevented:", err);
+    });
 }
 
 function showMessage(text) {
@@ -238,5 +206,6 @@ function showMessage(text) {
 
 </body>
 </html>
+
 
 
