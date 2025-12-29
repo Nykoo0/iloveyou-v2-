@@ -159,6 +159,20 @@ button {
     from { opacity: 0; }
     to { opacity: 1; }
 }
+
+/* 🖊️ WATERMARK */
+.watermark {
+    position: fixed;
+    bottom: 20px;
+    right: 25px;
+    font-size: 0.9rem;
+    color: var(--pink);
+    opacity: 0.5;
+    letter-spacing: 1px;
+    z-index: 10;
+    pointer-events: none;
+    text-shadow: 0 0 8px rgba(255, 143, 177, 0.4);
+}
 </style>
 </head>
 <body>
@@ -185,6 +199,9 @@ for (let i = 0; i < 45; i++) {
 
     <div id="message"></div>
 </div>
+
+<!-- WATERMARK -->
+<div class="watermark">@editsbynyko</div>
 
 <!-- AUDIO -->
 <audio id="audio"></audio>
