@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>For You ❤️</title>
+
+<style>
+:root {
+    --pink: #ff8fb1;
+    --soft-pink: rgba(255, 143, 177, 0.25);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", Arial, sans-serif;
+}
+
+body {
+    height: 100vh;
+    background: radial-gradient(circle at top, #111, #000);
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+}
+
+/* ❤️ HEART BACKGROUND */
+.heart {
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--pink);
+    transform: rotate(45deg);
+    animation: floatUp linear infinite;
+    opacity: 0.6;
+    filter: blur(0.3px);
+}
+
+.heart::before,
+.heart::after {
+    content: "";
+    position: absolute;
+    width: 18px;
+    height: 18px;
+    background: var(--pink);
+    border-radius: 50%;
+}
+
+.heart::before {
+    top: -9px;
+    left: 0;
+}
+
+.heart::after {
+    left: -9px;
+    top: 0;
+}
+
+@keyframes floatUp {
+    from {
+        transform: translateY(110vh) rotate(45deg) scale(0.8);
+        opacity: 0;
+    }
+    20% { opacity: 0.6; }
+    to {
+        transform: translateY(-10vh) rotate(45deg) scale(1.1);
+        opacity: 0;
+    }
+}
+
+/* 💌 MAIN CARD */
+.card {
+    z-index: 5;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--soft-pink);
+    backdrop-filter: blur(12px);
+    padding: 50px 60px;
+    border-radius: 25px;
+    text-align: center;
+    box-shadow: 0 0 40px rgba(255, 143, 177, 0.15);
+    animation: cardIn 1.4s ease;
+}
+
+@keyframes cardIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8) translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1) translateY(0);
+    }
+}
+
+h1 {
+    font-size: 3.2rem;
+    color: var(--pink);
+    margin-bottom: 30px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px var(--pink); }
+    to { text-shadow: 0 0 20px var(--pink); }
+}
+
+/* 💖 BUTTONS */
+.buttons {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+button {
+    padding: 14px 28px;
+    font-size: 1.05rem;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.35s ease;
+}
+
+.love {
+    background: var(--pink);
+    color: black;
+    box-shadow: 0 0 15px rgba(255, 143, 177, 0.6);
+}
+
+.love:hover {
+    transform: scale(1.15);
+    box-shadow: 0 0 30px rgba(255, 143, 177, 0.9);
+}
+
+.ew {
+    background: white;
+    color: black;
+    opacity: 0.85;
+}
+
+.ew:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+/* 💬 MESSAGE */
+#message {
+    margin-top: 30px;
+    font-size: 1.6rem;
+    color: var(--pink);
+    min-height: 40px;
+    animation: fadeIn 0.8s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEART GENERATOR -->
+<script>
+for (let i = 0; i < 45; i++) {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = 6 + Math.random() * 6 + "s";
+    heart.style.width = heart.style.height = 12 + Math.random() * 18 + "px";
+    document.body.appendChild(heart);
+}
+</script>
+
+<div class="card">
+    <h1>I Love You ❤️</h1>
+
+    <div class="buttons">
+        <button class="love" onclick="loveChoice()">I love you</button>
+        <button class="ew" onclick="ewChoice()">Ew I don’t love you</button>
+    </div>
+
+    <div id="message"></div>
+</div>
+
+<!-- AUDIO -->
+<audio id="audio"></audio>
+
+<script>
+const audio = document.getElementById("audio");
+
+function loveChoice() {
+    showMessage("You bring out the extraordinary 💕");
+    playSong("1.mp3");
+}
+
+function ewChoice() {
+    showMessage("Idc you’re stuck with me 😈💗");
+    playSong("2.mp3");
+}
+
+function playSong(src) {
+    audio.pause();
+    audio.src = src;
+    audio.currentTime = 0;
+    audio.play();
+}
+
+function showMessage(text) {
+    const msg = document.getElementById("message");
+    msg.style.opacity = 0;
+    setTimeout(() => {
+        msg.innerText = text;
+        msg.style.opacity = 1;
+    }, 200);
+}
+</script>
+
+</body>
+</html>
